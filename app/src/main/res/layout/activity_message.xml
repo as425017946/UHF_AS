@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@mipmap/img_common_bg"
+    tools:context=".mine.MessageActivity">
+    <include android:layout_width="match_parent"
+        android:layout_height="68dp"
+        layout="@layout/common_top"></include>
+
+    <LinearLayout
+        android:layout_width="97dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@mipmap/notice_img_title">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_white"
+            android:text="消息中心"
+            android:textSize="16sp"/>
+    </LinearLayout>
+   <com.jcodecraeer.xrecyclerview.XRecyclerView
+       android:id="@+id/messages_xrv"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_marginLeft="25dp"
+       android:layout_marginRight="20dp">
+
+   </com.jcodecraeer.xrecyclerview.XRecyclerView>
+</LinearLayout>

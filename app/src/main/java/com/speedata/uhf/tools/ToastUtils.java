@@ -1,0 +1,70 @@
+package com.speedata.uhf.tools;
+
+
+import android.view.Gravity;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.speedata.uhf.entity.UrlCollect;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.speedata.uhf.MyApp.getInstance;
+
+
+public class ToastUtils {
+
+    //短时间的toast
+    public static void shortToast(String text){
+        if (UrlCollect.isLog){
+            Toast.makeText(getInstance(),text, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //长时间的toast
+    public static void longToast(String text){
+        if (UrlCollect.isLog) {
+            Toast.makeText(getInstance(), text, Toast.LENGTH_LONG).show();
+        }
+    }
+
+    //自定义时间
+    public static void timeToast(String text, Long time){
+        if (UrlCollect.isLog) {
+            final Toast toast = Toast.makeText(getInstance(), text, Toast.LENGTH_LONG);
+            final Timer timer = new Timer();
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    toast.cancel();
+                    timer.cancel();
+                }
+            }, time);
+        }
+    }
+
+    //居中显示
+    public static void centerToast(String text){
+        if (UrlCollect.isLog) {
+            Toast toast = Toast.makeText(getInstance(), text, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+    }
+
+    //图片Toast
+    public static void imageToast(String text, int img){
+        if (UrlCollect.isLog) {
+            Toast toast = Toast.makeText(getInstance(), text, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            LinearLayout toastView = (LinearLayout) toast.getView();
+            ImageView imageCodeProject = new ImageView(getInstance());
+            imageCodeProject.setImageResource(img);
+            toastView.addView(imageCodeProject, 0);
+            toast.show();
+        }
+    }
+
+}
