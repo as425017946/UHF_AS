@@ -1,7 +1,7 @@
 package com.speedata.uhf;
 
 public class Api {
-    public static String ossurl = "https://jiaoyuvideo.oss-cn-beijing.aliyuncs.com/";
+    public static String ossurl = "https://back-green.oss-cn-beijing.aliyuncs.com/";
     public static String apiurl = "http://39.107.70.80:8080/treeFront/merchant/";
     //登录
     public static String login = apiurl+"userLogin";
@@ -15,5 +15,9 @@ public class Api {
     public static String zhongzhi_state = apiurl+"getTreeInfo";
     //养护记录
     public static String yanghujilu = apiurl+"getTreeHistory";
+    //审批记录
+    public static String shenpijiliu = apiurl+"getApproveRecord";
+    //产地信息
+    public static String chandixinxi = apiurl+"getTreeProduce";
 
 }

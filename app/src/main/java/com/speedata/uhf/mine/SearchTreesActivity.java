@@ -1,11 +1,16 @@
 package com.speedata.uhf.mine;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -13,10 +18,16 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.speedata.uhf.Api;
 import com.speedata.uhf.R;
+import com.speedata.uhf.adapter.ShenpiAdapter;
 import com.speedata.uhf.bean.SearchTreeZhiwuinfoBean;
 import com.speedata.uhf.bean.SearchTreesStateBean;
+import com.speedata.uhf.bean.SearchTreesZhongzhiinfoBean;
+import com.speedata.uhf.bean.ShenpijiluBean;
+import com.speedata.uhf.bean.YanghuBean;
 import com.speedata.uhf.tools.SharedPFUtils;
 import com.speedata.uhf.tools.ToastUtils;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,11 +59,14 @@ public class SearchTreesActivity extends BaseActivity implements View.OnClickLis
         relativeLayout3.setOnClickListener(this);
         relativeLayout4.setOnClickListener(this);
         setinfo();
+        getshenpiinfo();
         //        Log.e("+++", "onCreate: "+danhao );
     }
 
     @BindView(R.id.commoe_left)
     ImageView img_left;
+    @BindView(R.id.trees_starwork)
+    LinearLayout layout_starwork;
     private void setinfo() {
         img_left.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,11 +74,22 @@ public class SearchTreesActivity extends BaseActivity implements View.OnClickLis
                 SearchTreesActivity.this.finish();
             }
         });
+        layout_starwork.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SearchTreesActivity.this,SearchTreesMoreActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
      * 查询种植人头像和植物生长状态
      */
+    @BindView(R.id.trees_topname)
+    TextView tv_topname;
+    @BindView(R.id.search_tree_headimg)
+    ImageView img_tophead;
     private void selectstate(String zhi) {
         OkGo.post(Api.state_peoson)
                 .tag(this)
@@ -81,8 +106,32 @@ public class SearchTreesActivity extends BaseActivity implements View.OnClickLis
                         Gson gson = new Gson();
                         SearchTreesStateBean stateBean = gson.fromJson(s,SearchTreesStateBean.class);
                         if (stateBean.getState()==1){
+                            tv_topname.setText(stateBean.getData().getTREE_OWNER());
+                            if (stateBean.getData().getGROWTH_STATE()==1){
+                                relativeLayout1.setEnabled(false);
+                                relativeLayout2.setEnabled(false);
+                                relativeLayout3.setEnabled(false);
+                                relativeLayout4.setEnabled(true);
+                            }else  if (stateBean.getData().getGROWTH_STATE()==2){
+                                relativeLayout1.setEnabled(false);
+                                relativeLayout2.setEnabled(false);
+                                relativeLayout3.setEnabled(true);
+                                relativeLayout4.setEnabled(true);
+                            }else  if (stateBean.getData().getGROWTH_STATE()==3){
+                                relativeLayout1.setEnabled(false);
+                                relativeLayout2.setEnabled(true);
+                                relativeLayout3.setEnabled(true);
+                                relativeLayout4.setEnabled(true);
+                            }else  if (stateBean.getData().getGROWTH_STATE()==4){
+                                relativeLayout1.setEnabled(true);
+                                relativeLayout2.setEnabled(true);
+                                relativeLayout3.setEnabled(true);
+                                relativeLayout4.setEnabled(true);
+                            }
                             //请求植物信息接口
                             getzhiwuinfo(danhao,stateBean.getData().getGROWTH_STATE(),"");
+                            getzhongzhiinfo(danhao,stateBean.getData().getGROWTH_STATE(),"");
+                            getyanghuinfo(danhao,stateBean.getData().getGROWTH_STATE(),"");
                         }else {
                             ToastUtils.shortToast(stateBean.getMessage());
                         }
@@ -254,15 +303,28 @@ public class SearchTreesActivity extends BaseActivity implements View.OnClickLis
         switch (view.getId()){
             case R.id.tree_1_1_layout:
                 chooseChioce(1);
+                //请求植物信息接口
+                getzhiwuinfo(danhao,4,"");
+                getzhongzhiinfo(danhao,4,"");
+                getyanghuinfo(danhao,4,"");
                 break;
             case R.id.tree_2_1_layout:
                 chooseChioce(2);
+                getzhiwuinfo(danhao,3,"");
+                getzhongzhiinfo(danhao,3,"");
+                getyanghuinfo(danhao,3,"");
                 break;
             case R.id.tree_3_1_layout:
                 chooseChioce(3);
+                getzhiwuinfo(danhao,2,"");
+                getzhongzhiinfo(danhao,2,"");
+                getyanghuinfo(danhao,2,"");
                 break;
             case R.id.tree_4_1_layout:
                 chooseChioce(4);
+                getzhiwuinfo(danhao,1,"");
+                getzhongzhiinfo(danhao,1,"");
+                getyanghuinfo(danhao,1,"");
                 break;
         }
     }
@@ -320,6 +382,160 @@ public class SearchTreesActivity extends BaseActivity implements View.OnClickLis
         img_tree4_show.setVisibility(View.VISIBLE);
         tv_main_4_1.setVisibility(View.VISIBLE);
         tv_bottom_4_2.setVisibility(View.GONE);
+    }
+
+    /**
+     * 种植情况
+     */
+    @BindView(R.id.trees_people)
+    TextView tv_people;
+    @BindView(R.id.trees_biaoduan)
+    TextView tv_biaoduan;
+    @BindView(R.id.trees_quyu)
+    TextView tv_quyu;
+    @BindView(R.id.trees_qukuai)
+    TextView tv_qukuai;
+    @BindView(R.id.trees_zhongzhitimte)
+    TextView tv_zhongzhitime;
+    private void getzhongzhiinfo(final String zhi, final int zhi2, String zhi3){
+        OkGo.post(Api.zhongzhi_state)
+                .tag(this)
+                .params("blockCode",zhi)
+                .params("growthState",zhi2)
+                .params("rfid",zhi3)
+                .execute(new StringCallback() {
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        ToastUtils.shortToast(e+"");
+                    }
+
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+                        Gson gson = new Gson();
+                        SearchTreesZhongzhiinfoBean zhongzhiinfoBean = gson.fromJson(s,SearchTreesZhongzhiinfoBean.class);
+                        if (zhongzhiinfoBean.getState()==1){
+                            tv_people.setText(zhongzhiinfoBean.getData().getTREE_OWNER());
+                            tv_biaoduan.setText(zhongzhiinfoBean.getData().getTENDERS());
+                            tv_quyu.setText(zhongzhiinfoBean.getData().getAREAS_NAME());
+                            tv_qukuai.setText(zhongzhiinfoBean.getData().getBLOCK_NAME());
+                            tv_zhongzhitime.setText(zhongzhiinfoBean.getData().getCREATE_TIME());
+                        }else {
+                            ToastUtils.shortToast(zhongzhiinfoBean.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 养护记录
+     * @param zhi
+     * @param zhi2
+     * @param zhi3
+     */
+    @BindView(R.id.trees_chucao)
+    TextView tv_chucao;
+    @BindView(R.id.trees_jiaoshui)
+    TextView tv_jiaoshui;
+    @BindView(R.id.trees_shifei)
+    TextView tv_shifei;
+    @BindView(R.id.trees_buzhi)
+    TextView tv_buzhi;
+    @BindView(R.id.trees_pailao)
+    TextView tv_pailao;
+    @BindView(R.id.trees_xiujian)
+    TextView tv_xiujian;
+    @BindView(R.id.trees_fangzhi)
+    TextView tv_fangzhi;
+    @BindView(R.id.trees_qita)
+    TextView tv_qita;
+    private void getyanghuinfo(final String zhi, final int zhi2, String zhi3){
+        OkGo.post(Api.yanghujilu)
+                .tag(this)
+                .params("blockCode",zhi)
+                .params("growthState",zhi2)
+                .params("rfid",zhi3)
+                .execute(new StringCallback() {
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        ToastUtils.shortToast(e+"");
+                    }
+
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+
+                        Gson gson = new Gson();
+                        YanghuBean yanghuBean = gson.fromJson(s,YanghuBean.class);
+                        if (yanghuBean.getState()==1){
+                            for (int i = 0; i < yanghuBean.getData().size() ; i++) {
+                                if (yanghuBean.getData().get(i).getWORK_NAME().equals("除草")){
+                                    tv_chucao.setText(yanghuBean.getData().get(i).getNUM()+"");
+                                }else  if (yanghuBean.getData().get(i).getWORK_NAME().equals("浇水")){
+                                    tv_jiaoshui.setText(yanghuBean.getData().get(i).getNUM()+"");
+                                }else  if (yanghuBean.getData().get(i).getWORK_NAME().equals("施肥")){
+                                    tv_shifei.setText(yanghuBean.getData().get(i).getNUM()+"");
+                                }else  if (yanghuBean.getData().get(i).getWORK_NAME().equals("补植")){
+                                    tv_buzhi.setText(yanghuBean.getData().get(i).getNUM()+"");
+                                }else  if (yanghuBean.getData().get(i).getWORK_NAME().equals("排涝")){
+                                    tv_pailao.setText(yanghuBean.getData().get(i).getNUM()+"");
+                                }else  if (yanghuBean.getData().get(i).getWORK_NAME().equals("修剪")){
+                                    tv_xiujian.setText(yanghuBean.getData().get(i).getNUM()+"");
+                                }else  if (yanghuBean.getData().get(i).getWORK_NAME().equals("病虫危害防治")){
+                                    tv_fangzhi.setText(yanghuBean.getData().get(i).getNUM()+"");
+                                }else  if (yanghuBean.getData().get(i).getWORK_NAME().equals("其他")){
+                                    tv_qita.setText(yanghuBean.getData().get(i).getNUM()+"");
+                                }
+                            }
+                        }else {
+                            ToastUtils.shortToast(yanghuBean.getMessage());
+                        }
+                    }
+                });
+    }
+
+    /**
+     * 审批记录
+     */
+    @BindView(R.id.trees_scroview)
+    ScrollView scrollView;
+    @BindView(R.id.trees_shenpijilu)
+    ListView listView;
+    ShenpiAdapter adapter;
+    ArrayList<ShenpijiluBean> arrayList = new ArrayList<>();
+    private void getshenpiinfo(){
+        scrollView.smoothScrollTo(0,0);
+        OkGo.post(Api.shenpijiliu)
+                .tag(this)
+                .params("page",1)
+                .params("pageSize",100)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        ToastUtils.shortToast(e+"");
+                    }
+
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                        Log.e("哈哈", "onSuccess: "+s );
+                        Gson gson = new Gson();
+                        ShenpijiluBean shenpijiluBean = gson.fromJson(s,ShenpijiluBean.class);
+                        if (shenpijiluBean.getState()==1){
+                            for (int i = 0; i < shenpijiluBean.getData().getPageInfo().getList().size() ; i++) {
+                                arrayList.add(shenpijiluBean);
+                            }
+                            adapter = new ShenpiAdapter(SearchTreesActivity.this,arrayList);
+                            listView.setAdapter(adapter);
+                        }else {
+                            ToastUtils.shortToast(shenpijiluBean.getMessage());
+                        }
+                    }
+                });
+
+
     }
 
 

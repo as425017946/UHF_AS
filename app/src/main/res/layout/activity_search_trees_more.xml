@@ -16,21 +16,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:orientation="horizontal">
 
         <RelativeLayout
+            android:id="@+id/tree_1_1_layout"
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_weight="1">
 
             <ImageView
+                android:id="@+id/tree_1_1_img_show"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:src="@mipmap/plant_icon_1_1" />
 
             <ImageView
+                android:id="@+id/tree_1_1_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
@@ -60,17 +64,20 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/tree_2_1_layout"
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_weight="1">
 
             <ImageView
+                android:id="@+id/tree_2_1_img_show"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:src="@mipmap/plant_icon_1_2" />
 
             <ImageView
+                android:id="@+id/tree_2_1_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
@@ -100,17 +107,20 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/tree_3_1_layout"
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_weight="1">
 
             <ImageView
+                android:id="@+id/tree_3_1_img_show"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:src="@mipmap/plant_icon_1_3" />
 
             <ImageView
+                android:id="@+id/tree_3_1_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
@@ -140,17 +150,20 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/tree_4_1_layout"
             android:layout_width="0dp"
             android:layout_height="55dp"
             android:layout_weight="1">
 
             <ImageView
+                android:id="@+id/tree_4_1_img_show"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:src="@mipmap/plant_icon_1_4" />
 
             <ImageView
+                android:id="@+id/tree_4_1_img"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
@@ -178,8 +191,8 @@
                 android:textSize="13sp"
                 android:visibility="gone" />
         </RelativeLayout>
-    </LinearLayout>
 
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -241,9 +254,10 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/trees_more_type"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="国槐"
+                            android:text=""
                             android:textColor="@color/text_white"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -262,9 +276,10 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/trees_more_shuling"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="国槐"
+                            android:text=""
                             android:textColor="@color/text_white"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -283,9 +298,10 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/trees_more_xiongjing"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="国槐"
+                            android:text=""
                             android:textColor="@color/text_white"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -304,9 +320,10 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/trees_more_guanfu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="国槐"
+                            android:text=""
                             android:textColor="@color/text_white"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -325,9 +342,10 @@
                             android:textSize="12sp" />
 
                         <TextView
+                            android:id="@+id/trees_more_chandi"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="国槐"
+                            android:text=""
                             android:textColor="@color/text_white"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -336,6 +354,7 @@
 
             <!--和萌芽期区分-->
             <LinearLayout
+                android:id="@+id/trees_more_qitastate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -394,9 +413,10 @@
                                 android:textSize="12sp" />
 
                             <TextView
+                                android:id="@+id/trees_more_people"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="国槐"
+                                android:text=""
                                 android:textColor="@color/text_white"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -416,9 +436,10 @@
                                 android:textSize="12sp" />
 
                             <TextView
+                                android:id="@+id/trees_more_biaoduan"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="国槐"
+                                android:text=""
                                 android:textColor="@color/text_white"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -438,9 +459,10 @@
                                 android:textSize="12sp" />
 
                             <TextView
+                                android:id="@+id/trees_more_quyu"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="国槐"
+                                android:text=""
                                 android:textColor="@color/text_white"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -460,9 +482,10 @@
                                 android:textSize="12sp" />
 
                             <TextView
+                                android:id="@+id/trees_more_qukuai"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="国槐"
+                                android:text=""
                                 android:textColor="@color/text_white"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -482,10 +505,229 @@
                                 android:textSize="12sp" />
 
                             <TextView
+                                android:id="@+id/trees_more_zhongzhitimte"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="国槐"
+                                android:text=""
                                 android:textColor="@color/text_white"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <!--养护任务统计-->
+                <Button
+                    android:layout_width="97dp"
+                    android:layout_height="27dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@mipmap/details_img_title"
+                    android:text="养护任务统计"
+                    android:textColor="@color/text_white"
+                    android:textSize="12sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/trees_more_chucao"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/text_white"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="除草"
+                                android:textColor="@color/text_green"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/trees_more_jiaoshui"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/text_white"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="浇水"
+                                android:textColor="@color/text_green"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/trees_more_shifei"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/text_white"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="施肥"
+                                android:textColor="@color/text_green"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/trees_more_buzhi"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/text_white"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="补植"
+                                android:textColor="@color/text_green"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/trees_more_pailao"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/text_white"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="排涝"
+                                android:textColor="@color/text_green"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/trees_more_xiujian"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/text_white"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="修剪"
+                                android:textColor="@color/text_green"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/trees_more_fangzhi"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/text_white"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="病虫危害防治"
+                                android:textColor="@color/text_green"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/trees_more_qita"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=""
+                                android:textColor="@color/text_white"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="其他"
+                                android:textColor="@color/text_green"
                                 android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
@@ -647,6 +889,7 @@
             </LinearLayout>
             <!--萌芽期用-->
             <LinearLayout
+                android:id="@+id/trees_more_mengya"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
@@ -677,9 +920,10 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/trees_more_addreess"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="国槐"
+                        android:text=""
                         android:textColor="@color/text_white"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -699,9 +943,10 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/trees_more_gonghuoshang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="国槐"
+                        android:text=""
                         android:textColor="@color/text_white"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -721,9 +966,10 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/trees_more_miaopumingname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="国槐"
+                        android:text=""
                         android:textColor="@color/text_white"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -743,9 +989,10 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/trees_more_qimiaotime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="国槐"
+                        android:text=""
                         android:textColor="@color/text_white"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -765,9 +1012,10 @@
                         android:textSize="12sp" />
 
                     <TextView
+                        android:id="@+id/trees_more_qimiao"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="国槐"
+                        android:text=""
                         android:textColor="@color/text_white"
                         android:textSize="12sp" />
                 </LinearLayout>

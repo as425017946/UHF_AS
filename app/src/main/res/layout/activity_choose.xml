@@ -66,8 +66,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
-                android:text="种树"
-                android:layout_marginLeft="52dp"
+                android:text="种树管理"
+                android:layout_marginLeft="36dp"
                 android:layout_marginTop="6dp"
                 android:textColor="@color/text_white"/>
         </LinearLayout>

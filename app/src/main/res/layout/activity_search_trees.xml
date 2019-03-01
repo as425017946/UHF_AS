@@ -11,9 +11,11 @@
         android:layout_height="68dp"
         layout="@layout/common_top"></include>
 
-    <ScrollView
+    <com.speedata.uhf.tools.ListScrollView
+        android:id="@+id/trees_scroview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,10 +70,11 @@
                             android:textSize="15sp" />
 
                         <TextView
+                            android:id="@+id/trees_topname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:text="种植人"
+                            android:text=""
                             android:textColor="@color/text_white"
                             android:textSize="17sp" />
                     </LinearLayout>
@@ -391,11 +394,11 @@
                             android:src="@mipmap/plant_bg_center_normal" />
 
                         <LinearLayout
+                            android:id="@+id/trees_starwork"
                             android:layout_width="54dp"
                             android:layout_height="54dp"
                             android:layout_alignParentRight="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="34dp"
+                            android:layout_marginTop="175dp"
                             android:background="@mipmap/plant_btn_normal"
                             android:gravity="center">
 
@@ -988,7 +991,7 @@
                                     android:id="@+id/trees_weizhi"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text=""
+                                    android:text="天津"
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -1053,16 +1056,17 @@
                                 <TextView
                                     android:layout_width="80dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="165dp"
+                                    android:layout_marginLeft="88dp"
                                     android:layout_marginBottom="10dp"
                                     android:text="种植人"
                                     android:textColor="@color/text_green"
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/trees_people"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="国槐"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -1075,16 +1079,17 @@
                                 <TextView
                                     android:layout_width="80dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="165dp"
+                                    android:layout_marginLeft="88dp"
                                     android:layout_marginBottom="10dp"
                                     android:text="标段"
                                     android:textColor="@color/text_green"
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/trees_biaoduan"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="国槐"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -1097,16 +1102,17 @@
                                 <TextView
                                     android:layout_width="80dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="165dp"
+                                    android:layout_marginLeft="88dp"
                                     android:layout_marginBottom="10dp"
                                     android:text="区域"
                                     android:textColor="@color/text_green"
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/trees_quyu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="国槐"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -1119,16 +1125,17 @@
                                 <TextView
                                     android:layout_width="80dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="165dp"
+                                    android:layout_marginLeft="88dp"
                                     android:layout_marginBottom="10dp"
                                     android:text="区块"
                                     android:textColor="@color/text_green"
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/trees_qukuai"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="国槐"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -1141,16 +1148,17 @@
                                 <TextView
                                     android:layout_width="80dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="165dp"
+                                    android:layout_marginLeft="88dp"
                                     android:layout_marginBottom="10dp"
                                     android:text="栽种时间"
                                     android:textColor="@color/text_green"
                                     android:textSize="12sp" />
 
                                 <TextView
+                                    android:id="@+id/trees_zhongzhitimte"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="国槐"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -1199,9 +1207,10 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/trees_chucao"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="1000"
+                                        android:text=""
                                         android:textColor="@color/text_white"
                                         android:textSize="22sp" />
 
@@ -1221,9 +1230,10 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/trees_jiaoshui"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="1000"
+                                        android:text=""
                                         android:textColor="@color/text_white"
                                         android:textSize="22sp" />
 
@@ -1243,9 +1253,10 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/trees_shifei"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="1000"
+                                        android:text=""
                                         android:textColor="@color/text_white"
                                         android:textSize="22sp" />
 
@@ -1265,9 +1276,10 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/trees_buzhi"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="1000"
+                                        android:text=""
                                         android:textColor="@color/text_white"
                                         android:textSize="22sp" />
 
@@ -1296,9 +1308,10 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/trees_pailao"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="1000"
+                                        android:text=""
                                         android:textColor="@color/text_white"
                                         android:textSize="22sp" />
 
@@ -1318,9 +1331,10 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/trees_xiujian"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="1000"
+                                        android:text=""
                                         android:textColor="@color/text_white"
                                         android:textSize="22sp" />
 
@@ -1340,9 +1354,10 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/trees_fangzhi"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="1000"
+                                        android:text=""
                                         android:textColor="@color/text_white"
                                         android:textSize="22sp" />
 
@@ -1362,9 +1377,10 @@
                                     android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/trees_qita"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="1000"
+                                        android:text=""
                                         android:textColor="@color/text_white"
                                         android:textSize="22sp" />
 
@@ -1411,43 +1427,20 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="审批记录"
+                            android:layout_marginLeft="8dp"
                             android:textColor="@color/text_white"
                             android:textSize="17sp" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="31dp"
-                        android:layout_marginRight="40dp"
-                        android:orientation="vertical">
+                    <ListView
+                        android:id="@+id/trees_shenpijilu"
+                        android:layout_width="278dp"
+                        android:layout_height="325dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="20dp">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:text="测试"
-                            android:textColor="@color/text_green"
-                            android:textSize="12sp" />
+                    </ListView>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="right"
-                            android:text="名字"
-                            android:textColor="@color/text_white"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:gravity="right"
-                            android:text="2019-02-26"
-                            android:textColor="@color/text_white"
-                            android:textSize="11sp" />
-                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -1485,5 +1478,5 @@
 
 
         </LinearLayout>
-    </ScrollView>
+    </com.speedata.uhf.tools.ListScrollView>
 </LinearLayout>
