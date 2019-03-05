@@ -1,6 +1,11 @@
 package com.speedata.uhf.mine;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Matrix;
+import android.graphics.PointF;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,15 +18,18 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.speedata.uhf.Api;
 import com.speedata.uhf.R;
 import com.speedata.uhf.adapter.ShenpiAdapter;
+import com.speedata.uhf.bean.FourtreeimgBean;
 import com.speedata.uhf.bean.SearchTreeZhiwuinfoBean;
 import com.speedata.uhf.bean.SearchTreesStateBean;
 import com.speedata.uhf.bean.SearchTreesZhongzhiinfoBean;
+import com.speedata.uhf.bean.SelectWorkBean;
 import com.speedata.uhf.bean.ShenpijiluBean;
 import com.speedata.uhf.bean.YanghuBean;
 import com.speedata.uhf.tools.SharedPFUtils;
@@ -34,10 +42,12 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 import okhttp3.Response;
 
+import static com.speedata.uhf.Api.fourimg;
+
 /**
  * 植树信息
  */
-public class SearchTreesActivity extends BaseActivity implements View.OnClickListener {
+public class SearchTreesActivity extends BaseActivity implements View.OnClickListener,View.OnTouchListener  {
     String danhao="";
     @BindView(R.id.tree_1_1_layout)
     RelativeLayout relativeLayout1;
@@ -59,14 +69,146 @@ public class SearchTreesActivity extends BaseActivity implements View.OnClickLis
         relativeLayout3.setOnClickListener(this);
         relativeLayout4.setOnClickListener(this);
         setinfo();
+        getfourimg();
         getshenpiinfo();
         //        Log.e("+++", "onCreate: "+danhao );
+    }
+
+    @BindView(R.id.search_tree_top_img)
+    ImageView img_1;
+    @BindView(R.id.search_tree_top_img2)
+    ImageView img_2;
+    @BindView(R.id.search_tree_top_img3)
+    ImageView img_3;
+    @BindView(R.id.search_tree_top_img4)
+    ImageView img_4;
+    private void getfourimg() {
+        img_1.setVisibility(View.GONE);
+        img_2.setVisibility(View.GONE);
+        img_3.setVisibility(View.GONE);
+        img_4.setVisibility(View.GONE);
+
+        OkGo.post(Api.fourimg)
+                .tag(this)
+                .params("blockCode",danhao)
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        ToastUtils.shortToast(e+"");
+                    }
+
+                    @Override
+                    public void onSuccess(String s, Call call, Response response) {
+//                        Log.e("四个小图",s);
+                        Gson gson = new Gson();
+                        final FourtreeimgBean fourtreeimgBean = gson.fromJson(s,FourtreeimgBean.class);
+                        if (fourtreeimgBean.getState()==1){
+                            img_1.setOnClickListener(new View.OnClickListener() {
+                                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(SearchTreesActivity.this, ImgActivity.class);
+//                                    intent.putExtra("imgurl",Api.ossurl+fourtreeimgBean.getData().get(0).getImg());
+                                    startActivity(intent
+                                            , ActivityOptions.makeSceneTransitionAnimation(SearchTreesActivity.this, v, "worksimg").toBundle()
+                                    );
+                                }
+                            });
+                            img_2.setOnClickListener(new View.OnClickListener() {
+                                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(SearchTreesActivity.this, ImgActivity.class);
+                                    intent.putExtra("imgurl",Api.ossurl+fourtreeimgBean.getData().get(1).getImg());
+                                    startActivity(intent
+                                            , ActivityOptions.makeSceneTransitionAnimation(SearchTreesActivity.this, v, "worksimg").toBundle()
+                                    );
+                                }
+                            });
+                            img_3.setOnClickListener(new View.OnClickListener() {
+                                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(SearchTreesActivity.this, ImgActivity.class);
+                                    intent.putExtra("imgurl",Api.ossurl+fourtreeimgBean.getData().get(2).getImg());
+                                    startActivity(intent
+                                            , ActivityOptions.makeSceneTransitionAnimation(SearchTreesActivity.this, v, "worksimg").toBundle()
+                                    );
+                                }
+                            });
+                            img_4.setOnClickListener(new View.OnClickListener() {
+                                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(SearchTreesActivity.this, ImgActivity.class);
+                                    intent.putExtra("imgurl",Api.ossurl+fourtreeimgBean.getData().get(3).getImg());
+                                    startActivity(intent
+                                            , ActivityOptions.makeSceneTransitionAnimation(SearchTreesActivity.this, v, "worksimg").toBundle()
+                                    );
+                                }
+                            });
+                            if (fourtreeimgBean.getData().size()==1){
+                                img_1.setVisibility(View.VISIBLE);
+                                Glide.with(SearchTreesActivity.this)
+                                        .load(Api.ossurl+fourtreeimgBean.getData().get(0).getImg())
+                                        .into(img_1);
+                            }
+                            if (fourtreeimgBean.getData().size()==2){
+                                img_1.setVisibility(View.VISIBLE);
+                                img_2.setVisibility(View.VISIBLE);
+                                Glide.with(SearchTreesActivity.this)
+                                        .load(Api.ossurl+fourtreeimgBean.getData().get(0).getImg())
+                                        .into(img_1);
+                                Glide.with(SearchTreesActivity.this)
+                                        .load(Api.ossurl+fourtreeimgBean.getData().get(1).getImg())
+                                        .into(img_2);
+                            }
+                            if (fourtreeimgBean.getData().size()==3){
+                                img_1.setVisibility(View.VISIBLE);
+                                img_2.setVisibility(View.VISIBLE);
+                                img_3.setVisibility(View.VISIBLE);
+                                Glide.with(SearchTreesActivity.this)
+                                        .load(Api.ossurl+fourtreeimgBean.getData().get(0).getImg())
+                                        .into(img_1);
+                                Glide.with(SearchTreesActivity.this)
+                                        .load(Api.ossurl+fourtreeimgBean.getData().get(1).getImg())
+                                        .into(img_2);
+                                Glide.with(SearchTreesActivity.this)
+                                        .load(Api.ossurl+fourtreeimgBean.getData().get(2).getImg())
+                                        .into(img_3);
+                            }
+                            if (fourtreeimgBean.getData().size()==4){
+                                img_1.setVisibility(View.VISIBLE);
+                                img_2.setVisibility(View.VISIBLE);
+                                img_3.setVisibility(View.VISIBLE);
+                                img_4.setVisibility(View.VISIBLE);
+                                Glide.with(SearchTreesActivity.this)
+                                        .load(Api.ossurl+fourtreeimgBean.getData().get(0).getImg())
+                                        .into(img_1);
+                                Glide.with(SearchTreesActivity.this)
+                                        .load(Api.ossurl+fourtreeimgBean.getData().get(1).getImg())
+                                        .into(img_2);
+                                Glide.with(SearchTreesActivity.this)
+                                        .load(Api.ossurl+fourtreeimgBean.getData().get(2).getImg())
+                                        .into(img_3);
+                                Glide.with(SearchTreesActivity.this)
+                                        .load(Api.ossurl+fourtreeimgBean.getData().get(3).getImg())
+                                        .into(img_4);
+                            }
+                        }else {
+                            ToastUtils.shortToast(fourtreeimgBean.getMessage());
+                        }
+                    }
+                });
     }
 
     @BindView(R.id.commoe_left)
     ImageView img_left;
     @BindView(R.id.trees_starwork)
     LinearLayout layout_starwork;
+    @BindView(R.id.seatch_main)
+    LinearLayout layout_main;
     private void setinfo() {
         img_left.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,10 +219,53 @@ public class SearchTreesActivity extends BaseActivity implements View.OnClickLis
         layout_starwork.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchTreesActivity.this,SearchTreesMoreActivity.class);
-                startActivity(intent);
+                OkGo.post(Api.selectwork)
+                        .tag(this)
+                        .params("page",1)
+                        .params("pageSize",8)
+                        .params("blockCode",SharedPFUtils.getParam(SearchTreesActivity.this,"danhao","").toString())
+                        .params("groupCode",SharedPFUtils.getParam(SearchTreesActivity.this,"groupno","").toString())
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onError(Call call, Response response, Exception e) {
+                                super.onError(call, response, e);
+                                ToastUtils.shortToast(e+"");
+                            }
+
+                            @Override
+                            public void onSuccess(String s, Call call, Response response) {
+                                Gson gson = new Gson();
+                                SelectWorkBean workBean = gson.fromJson(s,SelectWorkBean.class);
+                                if (workBean.getState()==1){
+                                    if (workBean.getData().getPageInfo().getList().size()>0){
+                                        for (int i = 0; i < workBean.getData().getPageInfo().getList().size(); i++) {
+                                            if (workBean.getData().getPageInfo().getList().get(i).getSTATUS().equals("0")||workBean.getData().getPageInfo().getList().get(i).getSTATUS().equals("3")){
+                                                ToastUtils.shortToast("暂无任务");
+                                            }else {
+                                                Intent intent = new Intent(SearchTreesActivity.this,SearchTreesZuoyeActivity.class);
+                                                startActivity(intent);
+                                                break;
+                                            }
+                                        }
+
+                                    }else {
+                                        ToastUtils.shortToast("暂无任务可做");
+                                    }
+                                }else {
+                                    ToastUtils.shortToast(workBean.getMessage());
+                                }
+                            }
+                        });
+
             }
         });
+//        layout_main.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(SearchTreesActivity.this,SearchTreesMoreActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     /**
@@ -104,8 +289,30 @@ public class SearchTreesActivity extends BaseActivity implements View.OnClickLis
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
                         Gson gson = new Gson();
-                        SearchTreesStateBean stateBean = gson.fromJson(s,SearchTreesStateBean.class);
+                        final SearchTreesStateBean stateBean = gson.fromJson(s,SearchTreesStateBean.class);
                         if (stateBean.getState()==1){
+                            Log.e("***", "onSuccess: 头像"+ stateBean.getData().getOWNER_PHOTO());
+                            Glide.with(SearchTreesActivity.this)
+                                    .load(Api.ossurl+stateBean.getData().getOWNER_PHOTO())
+                                    .into(img_tophead);
+
+                            Glide.with(SearchTreesActivity.this)
+                                    .load(Api.ossurl+stateBean.getData().getOWNER_PHOTO())
+                                    .into(img_tophead);
+
+                            img_tophead.setOnClickListener(new View.OnClickListener() {
+                                @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(SearchTreesActivity.this, ImgActivity.class);
+                                    intent.putExtra("imgurl",Api.ossurl+stateBean.getData().getOWNER_PHOTO());
+                                    startActivity(intent
+                                            , ActivityOptions.makeSceneTransitionAnimation(SearchTreesActivity.this, v, "worksimg").toBundle()
+                                    );
+                                }
+                            });
+
+
                             tv_topname.setText(stateBean.getData().getTREE_OWNER());
                             if (stateBean.getData().getGROWTH_STATE()==1){
                                 relativeLayout1.setEnabled(false);
@@ -538,5 +745,79 @@ public class SearchTreesActivity extends BaseActivity implements View.OnClickLis
 
     }
 
+    // 縮放控制
+    private Matrix matrix = new Matrix();
+    private Matrix savedMatrix = new Matrix();
+
+    // 不同状态的表示：
+    private static final int NONE = 0;
+    private static final int DRAG = 1;
+    private static final int ZOOM = 2;
+    private int mode = NONE;
+
+    // 定义第一个按下的点，两只接触点的重点，以及出事的两指按下的距离：
+    private PointF startPoint = new PointF();
+    private PointF midPoint = new PointF();
+    private float oriDis = 1f;
+    // 计算两个触摸点之间的距离
+    private float distance(MotionEvent event) {
+        float x = event.getX(0) - event.getX(1);
+        float y = event.getY(0) - event.getY(1);
+        return Float.valueOf(String.valueOf(Math.sqrt(x * x + y * y))) ;
+    }
+
+    // 计算两个触摸点的中点
+    private PointF middle(MotionEvent event) {
+        float x = event.getX(0) + event.getX(1);
+        float y = event.getY(0) + event.getY(1);
+        return new PointF(x / 2, y / 2);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        ImageView view = (ImageView) v;
+        switch (event.getAction() & MotionEvent.ACTION_MASK) {
+            // 单指
+            case MotionEvent.ACTION_DOWN:
+                matrix.set(view.getImageMatrix());
+                savedMatrix.set(matrix);
+                startPoint.set(event.getX(), event.getY());
+                mode = DRAG;
+                break;
+            // 双指
+            case MotionEvent.ACTION_POINTER_DOWN:
+                oriDis = distance(event);
+                if (oriDis > 10f) {
+                    savedMatrix.set(matrix);
+                    midPoint = middle(event);
+                    mode = ZOOM;
+                }
+                break;
+            // 手指放开
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_POINTER_UP:
+                mode = NONE;
+                break;
+            // 单指滑动事件
+            case MotionEvent.ACTION_MOVE:
+                if (mode == DRAG) {
+                    // 是一个手指拖动
+                    matrix.set(savedMatrix);
+                    matrix.postTranslate(event.getX() - startPoint.x, event.getY() - startPoint.y);
+                } else if (mode == ZOOM) {
+                    // 两个手指滑动
+                    float newDist = distance(event);
+                    if (newDist > 10f) {
+                        matrix.set(savedMatrix);
+                        float scale = newDist / oriDis;
+                        matrix.postScale(scale, scale, midPoint.x, midPoint.y);
+                    }
+                }
+                break;
+        }
+        // 设置ImageView的Matrix
+        view.setImageMatrix(matrix);
+        return true;
+    }
 
 }

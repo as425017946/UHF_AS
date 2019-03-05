@@ -20,20 +20,104 @@
         android:layout_marginTop="36dp"
         android:background="@mipmap/upload_img_title">
         <TextView
+            android:id="@+id/upimg_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_white"
-            android:text="ID:12345646546"
+            android:text="ID:"
             android:layout_marginLeft="40dp"
             android:layout_marginBottom="6dp"
             android:textSize="14sp"/>
     </LinearLayout>
-    <ImageView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <RelativeLayout
+            android:layout_width="104dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/upimg_show"
+                android:layout_width="104dp"
+                android:layout_height="104dp"
+                android:src="@mipmap/upload_btn_pho"/>
+            <ImageView
+                android:id="@+id/upimg_show_delete"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:src="@mipmap/search_delete"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="104dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/upimg_show2"
+                android:layout_width="104dp"
+                android:layout_height="104dp"
+                android:src="@mipmap/upload_btn_pho"/>
+            <ImageView
+                android:id="@+id/upimg_show_delete2"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:src="@mipmap/search_delete"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="104dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/upimg_show3"
+                android:layout_width="104dp"
+                android:layout_height="104dp"
+                android:src="@mipmap/upload_btn_pho"/>
+            <ImageView
+                android:id="@+id/upimg_show_delete3"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:src="@mipmap/search_delete"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <RelativeLayout
         android:layout_width="104dp"
-        android:layout_height="104dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        android:src="@mipmap/upload_btn_pho"/>
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/upimg_show4"
+            android:layout_width="104dp"
+            android:layout_height="104dp"
+            android:src="@mipmap/upload_btn_pho"/>
+        <ImageView
+            android:id="@+id/upimg_show_delete4"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:visibility="gone"
+            android:src="@mipmap/search_delete"/>
+    </RelativeLayout>
     <Button
         android:id="@+id/login_btn"
         android:layout_width="match_parent"

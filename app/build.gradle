@@ -66,4 +66,8 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.0'
 
     implementation 'com.jcodecraeer:xrecyclerview:+'
+    //导入图片选择器
+    implementation 'com.github.wildma:PictureSelector:1.1.2'
+    //引入阿里云oss包
+    implementation 'com.aliyun.dpa:oss-android-sdk:+'
 }

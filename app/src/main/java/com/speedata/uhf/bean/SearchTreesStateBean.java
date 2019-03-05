@@ -45,6 +45,15 @@ public class SearchTreesStateBean {
         private String TREE_OWNER;
         private int GROWTH_STATE;
 
+        public String getOWNER_PHOTO() {
+            return OWNER_PHOTO;
+        }
+
+        public void setOWNER_PHOTO(String OWNER_PHOTO) {
+            this.OWNER_PHOTO = OWNER_PHOTO;
+        }
+
+        private String OWNER_PHOTO;
         public String getTREE_OWNER() {
             return TREE_OWNER;
         }

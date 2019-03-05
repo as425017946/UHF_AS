@@ -23,7 +23,21 @@ public class ListScrollView extends ScrollView {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        requestDisallowInterceptTouchEvent(true);
+
+//        ev.getAction()
+        switch (ev.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                requestDisallowInterceptTouchEvent(false);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                requestDisallowInterceptTouchEvent(true);
+                break;
+            case MotionEvent.ACTION_UP:
+                requestDisallowInterceptTouchEvent(true);
+                break;
+        }
+
         return super.dispatchTouchEvent(ev);
     }
+
 }

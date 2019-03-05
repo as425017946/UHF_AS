@@ -19,5 +19,15 @@ public class Api {
     public static String shenpijiliu = apiurl+"getApproveRecord";
     //产地信息
     public static String chandixinxi = apiurl+"getTreeProduce";
+    //上传植物照片
+    public static String uptreeimg = apiurl+"updateTreeImg";
+    //查询
+    public static String selectwork = apiurl+"getTreeConservationPlan";
+    //开始作业
+    public static String starwork = apiurl+"startTreeConservationPlan";
+    //结束作业
+    public static String stopwork = apiurl+"stopTreeConservationPlan";
+    //种植人头像旁四张图片
+    public static String fourimg = apiurl+"getTreeImg";
 
 }

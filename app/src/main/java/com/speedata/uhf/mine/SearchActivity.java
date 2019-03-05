@@ -50,8 +50,14 @@ public class SearchActivity extends BaseActivity {
         btn_sousuo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SearchActivity.this,SearchTreesActivity.class);
-                startActivity(intent);
+                if (getIntent().getStringExtra("searchid").equals("1")){
+                    Intent intent = new Intent(SearchActivity.this,SearchTreesActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(SearchActivity.this,UpImgActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
         //扫描二维码
@@ -59,6 +65,7 @@ public class SearchActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SearchActivity.this,SaomiaoActivity.class);
+                intent.putExtra("searchid",getIntent().getStringExtra("searchid"));
                 startActivity(intent);
             }
         });

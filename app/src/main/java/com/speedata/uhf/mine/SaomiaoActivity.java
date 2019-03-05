@@ -48,8 +48,13 @@ public class SaomiaoActivity extends BaseActivity {
             String scanResult = bundle.getString(Constant.INTENT_EXTRA_KEY_QR_SCAN);
             //将扫描出的信息显示出来
             SharedPFUtils.setParam(SaomiaoActivity.this,"danhao",scanResult);
-            Intent intent = new Intent(SaomiaoActivity.this,SearchTreesActivity.class);
-            startActivity(intent);
+           if (getIntent().getStringExtra("searchid").equals("1")){
+               Intent intent = new Intent(SaomiaoActivity.this,SearchTreesActivity.class);
+               startActivity(intent);
+           }else {
+               Intent intent = new Intent(SaomiaoActivity.this,UpImgActivity.class);
+               startActivity(intent);
+           }
            SaomiaoActivity.this.finish();
         }else {
             SaomiaoActivity.this.finish();

@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:id="@+id/zuoye_img"
             android:layout_width="match_parent"
             android:layout_height="178dp"
             android:layout_marginTop="30dp"
@@ -37,6 +38,7 @@
         android:layout_marginBottom="15dp"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/zuoye_btn_1"
             android:layout_width="92dp"
             android:layout_height="26dp"
             android:background="@mipmap/btn_work_highlight"
@@ -48,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <Button
+            android:id="@+id/zuoye_btn_2"
             android:layout_width="92dp"
             android:layout_height="26dp"
             android:background="@mipmap/btn_work_highlight"
@@ -64,6 +67,7 @@
         android:layout_marginBottom="15dp"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/zuoye_btn_3"
             android:layout_width="92dp"
             android:layout_height="26dp"
             android:background="@mipmap/btn_work_highlight"
@@ -75,6 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <Button
+            android:id="@+id/zuoye_btn_4"
             android:layout_width="92dp"
             android:layout_height="26dp"
             android:background="@mipmap/btn_work_highlight"
@@ -91,6 +96,7 @@
         android:layout_marginBottom="15dp"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/zuoye_btn_5"
             android:layout_width="92dp"
             android:layout_height="26dp"
             android:background="@mipmap/btn_work_highlight"
@@ -102,6 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <Button
+            android:id="@+id/zuoye_btn_6"
             android:layout_width="92dp"
             android:layout_height="26dp"
             android:background="@mipmap/btn_work_highlight"
@@ -118,6 +125,7 @@
         android:layout_marginBottom="15dp"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/zuoye_btn_7"
             android:layout_width="92dp"
             android:layout_height="26dp"
             android:background="@mipmap/btn_work_highlight"
@@ -129,6 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <Button
+            android:id="@+id/zuoye_btn_8"
             android:layout_width="92dp"
             android:layout_height="26dp"
             android:background="@mipmap/btn_work_highlight"
@@ -141,11 +150,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="52dp"
         android:layout_marginRight="52dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginTop="30dp"
         android:gravity="center"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/wancheng"
             android:layout_width="236dp"
             android:layout_height="38dp"
             android:background="@mipmap/start_btn_compiete_disable"

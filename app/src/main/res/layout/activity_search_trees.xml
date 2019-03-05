@@ -39,8 +39,8 @@
                         android:id="@+id/search_tree_headimg"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/ceshi" />
+                        android:transitionName="worksimg"
+                        android:scaleType="fitXY" />
 
                     <ImageView
                         android:layout_width="match_parent"
@@ -93,8 +93,7 @@
                                 android:id="@+id/search_tree_top_img"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:scaleType="fitXY"
-                                android:src="@mipmap/ceshi" />
+                                android:scaleType="fitXY" />
 
                             <ImageView
                                 android:layout_width="match_parent"
@@ -116,8 +115,7 @@
                                 android:id="@+id/search_tree_top_img2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:scaleType="fitXY"
-                                android:src="@mipmap/ceshi" />
+                                android:scaleType="fitXY" />
 
                             <ImageView
                                 android:layout_width="match_parent"
@@ -141,8 +139,7 @@
                                 android:id="@+id/search_tree_top_img3"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:scaleType="fitXY"
-                                android:src="@mipmap/ceshi" />
+                                android:scaleType="fitXY" />
 
                             <ImageView
                                 android:layout_width="match_parent"
@@ -164,8 +161,7 @@
                                 android:id="@+id/search_tree_top_img4"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:scaleType="fitXY"
-                                android:src="@mipmap/ceshi" />
+                                android:scaleType="fitXY"/>
 
                             <ImageView
                                 android:layout_width="match_parent"
@@ -361,6 +357,7 @@
             </LinearLayout>
             <!--下面展示的信息-->
             <LinearLayout
+                android:id="@+id/seatch_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"

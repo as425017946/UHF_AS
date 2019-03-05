@@ -37,13 +37,15 @@ public class ChooseActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ChooseActivity.this,SearchActivity.class);
+                intent.putExtra("searchid","1");
                 startActivity(intent);
             }
         });
         layout_zhongshu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ChooseActivity.this,UpImgActivity.class);
+                Intent intent = new Intent(ChooseActivity.this,SearchActivity.class);
+                intent.putExtra("searchid","2");
                 startActivity(intent);
             }
         });

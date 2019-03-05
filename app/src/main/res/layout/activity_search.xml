@@ -68,7 +68,7 @@
             android:layout_marginLeft="24dp"
             android:layout_height="20dp"
             android:scaleType="fitXY"
-            android:src="@mipmap/search_icon_search"/>
+            android:src="@mipmap/search_phones"/>
         <TextView
             android:id="@+id/search_id"
             android:layout_width="268dp"
@@ -88,6 +88,7 @@
         android:layout_marginTop="140dp"
         android:background="@mipmap/login_btn"
         android:textColor="@color/text_white"
+        android:visibility="gone"
         android:text="搜索"
         android:textSize="16sp"/>
     <Button
@@ -97,6 +98,7 @@
         android:layout_marginTop="40dp"
         android:background="@mipmap/search_btn_cancel"
         android:textColor="@color/text_white"
+        android:visibility="gone"
         android:text="取消"
         android:textSize="16sp"/>
 </LinearLayout>

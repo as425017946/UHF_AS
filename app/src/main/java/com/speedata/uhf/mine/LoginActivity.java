@@ -107,13 +107,14 @@ public class LoginActivity extends BaseActivity {
                                 @Override
                                 public void onSuccess(String s, Call call, Response response) {
                                     Gson gson = new Gson();
-                                    LoginBean loginBean = gson.fromJson(s,LoginBean.class);
+                                    final LoginBean loginBean = gson.fromJson(s,LoginBean.class);
                                     LoadingDailog.Builder loadBuilder=new LoadingDailog.Builder(LoginActivity.this)
                                             .setMessage("登录成功...")
                                             .setCancelable(false)
                                             .setCancelOutside(false);
                                     final LoadingDailog dialog=loadBuilder.create();
                                     if (loginBean.getState()==1){
+//                                        Log.e("用户id", "onSuccess: "+loginBean.getData().getGROUP_NO() );
                                         dialog.show();
                                         Handler handler = new Handler();
                                         handler.postDelayed(new Runnable() {
@@ -123,6 +124,8 @@ public class LoginActivity extends BaseActivity {
                                                 startActivity(intent);
                                                 SharedPFUtils.setParam(LoginActivity.this,"account",edt_zhanghao.getText().toString());
                                                 SharedPFUtils.setParam(LoginActivity.this,"password",edt_mima.getText().toString());
+                                                SharedPFUtils.setParam(LoginActivity.this,"userno",loginBean.getData().getUSER_NO());
+                                                SharedPFUtils.setParam(LoginActivity.this,"groupno",loginBean.getData().getGROUP_NO());
                                                 LoginActivity.this.finish();
                                             }
                                         },2000);
