@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.speedata.uhf.R;
+import com.speedata.uhf.tools.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -52,8 +53,9 @@ public class ChooseActivity extends BaseActivity {
         layout_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ChooseActivity.this,MessageActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ChooseActivity.this,MessageActivity.class);
+//                startActivity(intent);
+                ToastUtils.shortToast("待开发");
             }
         });
         layout_messages.setOnClickListener(new View.OnClickListener() {
