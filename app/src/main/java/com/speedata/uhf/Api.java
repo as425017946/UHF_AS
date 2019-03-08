@@ -2,7 +2,8 @@ package com.speedata.uhf;
 
 public class Api {
     public static String ossurl = "https://back-green.oss-cn-beijing.aliyuncs.com/";
-    public static String apiurl = "http://39.107.70.80:8080/treeFront/merchant/";
+//    public static String apiurl = "http://39.107.70.80:8080/treeFront/merchant/";
+    public static String apiurl = "http://47.93.224.76:8080/treeFront/merchant/";
     //登录
     public static String login = apiurl+"userLogin";
     //消息中心
@@ -29,5 +30,7 @@ public class Api {
     public static String stopwork = apiurl+"stopTreeConservationPlan";
     //种植人头像旁四张图片
     public static String fourimg = apiurl+"getTreeImg";
+    //根据rfid查区块编号
+    public static String selectrfid = apiurl+"getBlockCode";
 
 }

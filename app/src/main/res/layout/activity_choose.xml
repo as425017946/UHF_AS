@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="地理信息"
+            android:text="消息中心"
             android:layout_marginRight="35dp"
             android:layout_marginTop="6dp"
             android:textColor="@color/text_white"/>
@@ -101,6 +101,7 @@
         android:id="@+id/choose_messages"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         android:orientation="horizontal">
         <TextView
             android:layout_width="0dp"

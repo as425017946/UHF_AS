@@ -2,6 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="30dp"
+    android:background="@mipmap/img_common_bg"
     android:orientation="vertical">
 
     <ListView
@@ -14,6 +16,7 @@
         android:id="@+id/show_layout"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:visibility="gone"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -51,6 +54,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:layout_weight="0.01">
 
         <CheckBox
@@ -71,13 +75,15 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <Button
             android:id="@+id/btn_search_action"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.21"
+            android:layout_width="225dp"
+            android:layout_height="38dp"
+            android:background="@mipmap/login_btn"
+            android:textColor="@color/text_white"
             android:text="@string/Start_Search_Btn" />
 
         <Button
@@ -85,6 +91,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.19"
+            android:visibility="gone"
             android:text="@string/btn_export" />
 
         <Button
@@ -92,6 +99,7 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.19"
+            android:visibility="gone"
             android:text="@string/Cancle_btn" />
     </LinearLayout>
 

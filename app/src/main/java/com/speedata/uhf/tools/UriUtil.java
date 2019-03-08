@@ -89,4 +89,17 @@ public class UriUtil {
         }
         return filePath;
     }
+    // 两次点击按钮之间的点击间隔不能少于4000毫秒
+    private static final int MIN_CLICK_DELAY_TIME2 = 2000;
+    private static long lastClickTime2;
+
+    public static boolean isFastClick2() {
+        boolean flag = false;
+        long curClickTime = System.currentTimeMillis();
+        if ((curClickTime - lastClickTime2) >= MIN_CLICK_DELAY_TIME2) {
+            flag = true;
+        }
+        lastClickTime2 = curClickTime;
+        return flag;
+    }
 }

@@ -1,5 +1,6 @@
 package com.speedata.uhf;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -160,6 +161,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
     }
 
+    @SuppressLint("InvalidWakeLockTag")
     private void newWakeLock() {
         init_progress++;
         pM = (PowerManager) getSystemService(POWER_SERVICE);

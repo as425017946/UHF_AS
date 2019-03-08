@@ -23,6 +23,7 @@
         android:textSize="14sp"
         android:textColorHint="@color/text_blue"
         android:hint="账号"
+        android:singleLine="true"
         android:gravity="center"/>
     <EditText
         android:id="@+id/login_mima"

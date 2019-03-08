@@ -1,6 +1,7 @@
 package com.speedata.uhf.mine;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,17 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.alibaba.sdk.android.oss.ClientException;
+import com.alibaba.sdk.android.oss.OSS;
+import com.alibaba.sdk.android.oss.OSSClient;
+import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
+import com.alibaba.sdk.android.oss.callback.OSSProgressCallback;
+import com.alibaba.sdk.android.oss.common.auth.OSSCredentialProvider;
+import com.alibaba.sdk.android.oss.common.auth.OSSPlainTextAKSKCredentialProvider;
+import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.google.gson.Gson;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -21,10 +33,13 @@ import com.speedata.uhf.bean.SelectWorkBean;
 import com.speedata.uhf.bean.UpimgBean;
 import com.speedata.uhf.tools.SharedPFUtils;
 import com.speedata.uhf.tools.ToastUtils;
+import com.speedata.uhf.tools.UiUtils;
 import com.wildma.pictureselector.ImageUtils;
 import com.wildma.pictureselector.PictureSelector;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -178,6 +193,9 @@ public class SearchTreesZuoyeActivity extends BaseActivity implements View.OnCli
         OkGo.post(Api.starwork)
                 .tag(this)
                 .params("conservationCode",bianhaos)
+                .params("padUserName",SharedPFUtils.getParam(this,"owner","").toString())
+                .params("padUserNo",SharedPFUtils.getParam(this,"userno","").toString())
+                .params("padUserPhoto",SharedPFUtils.getParam(this,"ownerimg","").toString())
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
@@ -190,24 +208,7 @@ public class SearchTreesZuoyeActivity extends BaseActivity implements View.OnCli
                         Gson gson = new Gson();
                         UpimgBean upimgBean = gson.fromJson(s,UpimgBean.class);
                         if (upimgBean.getState()==1){
-                            OkGo.post(Api.stopwork)
-                                    .tag(this)
-                                    .params("conservationCode",bianhao)
-                                    .params("conservationPhoto",picturePath)
-                                    .execute(new StringCallback() {
-                                        @Override
-                                        public void onSuccess(String s, Call call, Response response) {
-                                            Log.e("编码",s);
-                                            Gson gson = new Gson();
-                                            UpimgBean upimgBean = gson.fromJson(s,UpimgBean.class);
-                                            if (upimgBean.getState()==1){
-                                               SearchTreesZuoyeActivity.this.finish();
-                                               ToastUtils.shortToast("作业完成");
-                                            }else {
-                                                ToastUtils.shortToast(upimgBean.getMessage());
-                                            }
-                                        }
-                                    });
+                            beginupload(picturePath);
                         }else {
                             ToastUtils.shortToast(upimgBean.getMessage());
                         }
@@ -224,11 +225,74 @@ public class SearchTreesZuoyeActivity extends BaseActivity implements View.OnCli
             if (data != null) {
                 picturePath = data.getStringExtra(PictureSelector.PICTURE_PATH);
                 img_zuoye.setImageBitmap(ImageUtils.getBitmap(picturePath));
+
                 btn_sousuo.setBackgroundDrawable(SearchTreesZuoyeActivity.this.getResources().getDrawable(R.mipmap.upload_btn_complete_highlight));
             }
         }
     }
+    /**上传图片**/
+    public void beginupload(String photourl) {
+//        Log.e("测试图片11", photourl+"");
+        final String endpoint = "oss-cn-beijing.aliyuncs.com";
+        final String startpoint = "back-green";
+        //     明文设置secret的方式建议只在测试时使用，更多鉴权模式请参考后面的`访问控制`章节
+        OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider("LTAI8ygujYgDvLJ9", "nLrO1bpn9IOpEu0tt0zyAaChc22j0c");
+        OSS oss = new OSSClient(getApplicationContext(), endpoint, credentialProvider);
+        //通过填写文件名形成objectname,通过这个名字指定上传和下载的文件
+        // 构造上传请求
+        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");//设置日期格式
+        final String objectname =df.format(new Date())+ ".png";
 
+        PutObjectRequest put = new PutObjectRequest(startpoint, objectname, photourl );
+        // 异步上传时可以设置进度回调
+        put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
+            @Override
+            public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+            }
+        });
+        OSSAsyncTask task = oss.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+            @Override
+            public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+
+//                Log.e("测试图片", Api.ossurl +objectname);
+
+                OkGo.post(Api.stopwork)
+                        .tag(this)
+                        .params("conservationCode",bianhao)
+                        .params("conservationPhoto",objectname)
+                        .execute(new StringCallback() {
+                            @Override
+                            public void onSuccess(String s, Call call, Response response) {
+                                Log.e("编码",s);
+                                Gson gson = new Gson();
+                                UpimgBean upimgBean = gson.fromJson(s,UpimgBean.class);
+                                if (upimgBean.getState()==1){
+                                    SearchTreesZuoyeActivity.this.finish();
+                                    ToastUtils.shortToast("作业完成");
+                                }else {
+                                    ToastUtils.shortToast(upimgBean.getMessage());
+                                }
+                            }
+                        });
+
+            }
+
+            @Override
+            public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
+                ToastUtils.shortToast("图片上传失败导致信息无法发布");
+
+                // 请求异常
+                if (clientExcepion != null) {
+                    // 本地异常如网络异常等
+                    clientExcepion.printStackTrace();
+                    ToastUtils.shortToast("图片上传失败导致信息无法发布");
+                }
+                if (serviceException != null) {
+                }
+            }
+        });
+
+    }
 
     @Override
     public void onClick(View view) {

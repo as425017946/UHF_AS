@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -52,12 +53,17 @@ import okhttp3.Response;
  * 上传图片
  */
 public class UpImgActivity extends BaseActivity {
-
+    String qukuaiid="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_up_img);
         ButterKnife.bind(this);
+        if (!TextUtils.isEmpty(SharedPFUtils.getParam(this,"danhao","").toString())){
+            qukuaiid =  SharedPFUtils.getParam(this,"danhao","").toString();
+        }else {
+            qukuaiid =  SharedPFUtils.getParam(this,"rfids","").toString();
+        }
         setinfo();
     }
 
@@ -108,7 +114,7 @@ public class UpImgActivity extends BaseActivity {
                 UpImgActivity.this.finish();
             }
         });
-        tv_id.setText("ID："+ SharedPFUtils.getParam(UpImgActivity.this,"userno","").toString());
+        tv_id.setText("ID："+ qukuaiid);
         img_show1.setVisibility(View.VISIBLE);
         img_show2.setVisibility(View.GONE);
         img_show3.setVisibility(View.GONE);
@@ -174,8 +180,10 @@ public class UpImgActivity extends BaseActivity {
         imgs = imgs.substring(0,imgs.length()-1);
         OkGo.post(Api.uptreeimg)
                 .tag(this)
-                .params("blockCode", SharedPFUtils.getParam(this,"danhao","").toString())
+                .params("blockCode",qukuaiid)
                 .params("treeImg",imgs)
+                .params("ownerPhoto",SharedPFUtils.getParam(this,"ownerimg","").toString())
+                .params("treeOwner",SharedPFUtils.getParam(this,"owner","").toString())
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(String s, Call call, Response response) {
@@ -206,7 +214,7 @@ public class UpImgActivity extends BaseActivity {
         if (requestCode == select1) {
             if (data != null) {
                 String picturePath = data.getStringExtra(PictureSelector.PICTURE_PATH);
-                Log.e("测试图片222", "onActivityResult: "+picturePath );
+//                Log.e("测试图片222", "onActivityResult: "+picturePath );
                 File file=new File(picturePath);
                 File f=new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+System.currentTimeMillis()+".png");
                 file.renameTo(f);
@@ -220,7 +228,7 @@ public class UpImgActivity extends BaseActivity {
         }else  if (requestCode == select2) {
             if (data != null) {
                 String picturePath = data.getStringExtra(PictureSelector.PICTURE_PATH);
-                Log.e("测试图片222", "onActivityResult: "+picturePath );
+//                Log.e("测试图片222", "onActivityResult: "+picturePath );
                 File file=new File(picturePath);
                 File f=new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+System.currentTimeMillis()+".png");
                 file.renameTo(f);
@@ -234,7 +242,7 @@ public class UpImgActivity extends BaseActivity {
         }else  if (requestCode == select3) {
             if (data != null) {
                 String picturePath = data.getStringExtra(PictureSelector.PICTURE_PATH);
-                Log.e("测试图片222", "onActivityResult: "+picturePath );
+//                Log.e("测试图片222", "onActivityResult: "+picturePath );
                 File file=new File(picturePath);
                 File f=new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+System.currentTimeMillis()+".png");
                 file.renameTo(f);
@@ -248,7 +256,7 @@ public class UpImgActivity extends BaseActivity {
         }else  if (requestCode == select4) {
             if (data != null) {
                 String picturePath = data.getStringExtra(PictureSelector.PICTURE_PATH);
-                Log.e("测试图片222", "onActivityResult: "+picturePath );
+//                Log.e("测试图片222", "onActivityResult: "+picturePath );
                 File file=new File(picturePath);
                 File f=new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+System.currentTimeMillis()+".png");
                 file.renameTo(f);
@@ -366,7 +374,7 @@ public class UpImgActivity extends BaseActivity {
 
     /**上传图片**/
     public void beginupload(Uri photourl, final int newzhi) {
-        Log.e("测试图片11", photourl+"");
+//        Log.e("测试图片11", photourl+"");
         final String endpoint = "oss-cn-beijing.aliyuncs.com";
         final String startpoint = "back-green";
         //     明文设置secret的方式建议只在测试时使用，更多鉴权模式请参考后面的`访问控制`章节
@@ -389,8 +397,8 @@ public class UpImgActivity extends BaseActivity {
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
 
 //                arrayList.remove(i);
-                Log.e("测试图片", Api.ossurl +objectname);
-                imgs = imgs+objectname;
+//                Log.e("测试图片", Api.ossurl +objectname);
+                imgs = imgs+objectname+",";
                 if (newzhi==imglist.size()){
                     imglist.clear();
                     upimg();
@@ -400,7 +408,7 @@ public class UpImgActivity extends BaseActivity {
             @Override
             public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
                 ToastUtils.shortToast("图片上传失败导致信息无法发布");
-
+                dissDialog();
                 // 请求异常
                 if (clientExcepion != null) {
                     // 本地异常如网络异常等

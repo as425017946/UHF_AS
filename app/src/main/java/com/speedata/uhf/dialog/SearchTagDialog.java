@@ -10,7 +10,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,14 +24,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 import com.speedata.libuhf.IUHFService;
 import com.speedata.libuhf.bean.SpdInventoryData;
 import com.speedata.libuhf.interfaces.OnSpdInventoryListener;
 import com.speedata.libuhf.utils.SharedXmlUtil;
+import com.speedata.uhf.Api;
 import com.speedata.uhf.MsgEvent;
 import com.speedata.uhf.R;
+import com.speedata.uhf.adapter.ReadCardAdapter;
 import com.speedata.uhf.excel.EPCBean;
 import com.speedata.uhf.libutils.excel.ExcelUtils;
+import com.speedata.uhf.mine.SearchActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -37,6 +45,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jxl.write.Colour;
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by 张明_ on 2016/12/28.
@@ -51,7 +61,8 @@ public class SearchTagDialog extends Dialog implements
     private ListView EpcList;
     private boolean inSearch = false;
     private List<EpcDataBase> firm = new ArrayList<EpcDataBase>();
-    private ArrayAdapter<EpcDataBase> adapter;
+//    private ArrayAdapter<EpcDataBase> adapter;
+    ReadCardAdapter adapter;
     private Context cont;
     private SoundPool soundPool;
     private int soundId;
@@ -68,12 +79,39 @@ public class SearchTagDialog extends Dialog implements
     private TextView totalTime;
     private long startCheckingTime;//盘点命令下发后截取的系统时间
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //刚进来就开始
+        inSearch = true;
+        this.setCancelable(true);
+        scant = 0;
+        firm.clear();
+        //取消掩码
+        iuhfService.selectCard(1, "", false);
+        EventBus.getDefault().post(new MsgEvent("CancelSelectCard", ""));
+        iuhfService.inventoryStart();
+        startCheckingTime = System.currentTimeMillis();
+        Action.setText("开始");
+        Cancle.setEnabled(false);
+        export.setEnabled(false);
+    }
+
     public SearchTagDialog(Context context, IUHFService iuhfService, String model) {
         super(context);
         // TODO Auto-generated constructor stub
         cont = context;
         this.iuhfService = iuhfService;
         this.model = model;
+
+    }
+
+    public SearchTagDialog(Context context, IUHFService iuhfService, String modle, int dialogTheme) {
+        super(context, dialogTheme);
+        cont = context;
+        this.iuhfService = iuhfService;
+        this.model = model;
+
     }
 
     @Override
@@ -104,9 +142,7 @@ public class SearchTagDialog extends Dialog implements
 
 
         //新的Listener回调参考代码
-
-        adapter = new ArrayAdapter<EpcDataBase>(
-                cont, android.R.layout.simple_list_item_1, firm);
+        adapter = new ReadCardAdapter(cont,firm);
         EpcList.setAdapter(adapter);
 
         iuhfService.setOnInventoryListener(new OnSpdInventoryListener() {
@@ -147,6 +183,10 @@ public class SearchTagDialog extends Dialog implements
                             soundPool.play(soundId, 1, 1, 0, 0, 1);
                         }
                     }
+                    //搜索到了就停止
+                    if (firm.size()>0){
+                        iuhfService.inventoryStop();
+                    }
                     adapter.notifyDataSetChanged();
                     Status.setText("Total: " + firm.size());
                     UpdateRateCount();
@@ -174,6 +214,7 @@ public class SearchTagDialog extends Dialog implements
         }
     };
 
+
     @Override
     protected void onStop() {
         Log.w("stop", "im stopping");
@@ -191,27 +232,18 @@ public class SearchTagDialog extends Dialog implements
             soundPool.release();
             dismiss();
         } else if (v == Action) {
-            if (inSearch) {
-                inSearch = false;
-                this.setCancelable(true);
-                iuhfService.inventoryStop();
-                Action.setText(R.string.Start_Search_Btn);
-                Cancle.setEnabled(true);
-                export.setEnabled(true);
-            } else {
-                inSearch = true;
-                this.setCancelable(false);
-                scant = 0;
-                firm.clear();
-                //取消掩码
-                iuhfService.selectCard(1, "", false);
-                EventBus.getDefault().post(new MsgEvent("CancelSelectCard", ""));
-                iuhfService.inventoryStart();
-                startCheckingTime = System.currentTimeMillis();
-                Action.setText(R.string.Stop_Search_Btn);
-                Cancle.setEnabled(false);
-                export.setEnabled(false);
-            }
+            inSearch = true;
+            this.setCancelable(true);
+            scant = 0;
+            firm.clear();
+            //取消掩码
+            iuhfService.selectCard(1, "", false);
+            EventBus.getDefault().post(new MsgEvent("CancelSelectCard", ""));
+            iuhfService.inventoryStart();
+            startCheckingTime = System.currentTimeMillis();
+            Action.setText("开始");
+            Cancle.setEnabled(false);
+            export.setEnabled(false);
         } else if (v == export) {
             kProgressHUD = KProgressHUD.create(cont)
                     .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -234,7 +266,7 @@ public class SearchTagDialog extends Dialog implements
                             try {
                                 ExcelUtils.getInstance()
                                         .setSHEET_NAME("UHFMsg")//设置表格名称
-                                        .setFONT_COLOR(Colour.BLUE)//设置标题字体颜色
+                                        .setFONT_COLOR(Colour.WHITE)//设置标题字体颜色
                                         .setFONT_TIMES(8)//设置标题字体大小
                                         .setFONT_BOLD(true)//设置标题字体是否斜体
                                         .setBACKGROND_COLOR(Colour.GRAY_25)//设置标题背景颜色
@@ -274,11 +306,30 @@ public class SearchTagDialog extends Dialog implements
         totalTime = (TextView) findViewById(R.id.totalTime);
     }
 
-    class EpcDataBase {
+    public class EpcDataBase {
         String epc;
         int valid;
         String rssi;
         String tid_user;
+        String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getQukuai() {
+            return qukuai;
+        }
+
+        public void setQukuai(String qukuai) {
+            this.qukuai = qukuai;
+        }
+
+        String qukuai;
 
         public EpcDataBase(String e, int v, String rssi, String tid_user) {
             // TODO Auto-generated constructor stub
@@ -299,12 +350,11 @@ public class SearchTagDialog extends Dialog implements
         @Override
         public String toString() {
             if (TextUtils.isEmpty(tid_user)) {
-                return "EPC:" + epc + "\n"
-                        + "(" + "COUNT:" + valid + ")" + " RSSI:" + rssi + "\n";
+                return  epc ;
+//                        + "(" + "COUNT:" + valid + ")" + " RSSI:" + rssi + "\n";
             } else {
-                return "EPC:" + epc + "\n"
-                        + "T/U:" + tid_user + "\n"
-                        + "(" + "COUNT:" + valid + ")" + " RSSI:" + rssi + "\n";
+                return  epc ;
+//                        + "(" + "COUNT:" + valid + ")" + " RSSI:" + rssi + "\n";
             }
         }
 

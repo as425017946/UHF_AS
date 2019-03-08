@@ -53,6 +53,7 @@ public class SaomiaoActivity extends BaseActivity {
                startActivity(intent);
            }else {
                Intent intent = new Intent(SaomiaoActivity.this,UpImgActivity.class);
+               intent.putExtra("qukuai",scanResult);
                startActivity(intent);
            }
            SaomiaoActivity.this.finish();

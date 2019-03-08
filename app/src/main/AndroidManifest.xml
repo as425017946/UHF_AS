@@ -29,7 +29,9 @@
         <activity android:name=".mine.SearchTreesZuoyeActivity" />
         <activity android:name=".mine.SearchTreesActivity" />
         <activity android:name=".mine.UpImgActivity" />
-        <activity android:name=".mine.SearchActivity" />
+        <activity android:name=".mine.SearchActivity" >
+
+        </activity>
         <activity android:name=".mine.MessageActivity" />
         <activity android:name=".mine.ChooseActivity" />
         <activity android:name=".mine.LoginActivity">
@@ -41,7 +43,9 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"

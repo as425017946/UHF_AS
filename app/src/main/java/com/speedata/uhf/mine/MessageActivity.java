@@ -17,6 +17,7 @@ import com.speedata.uhf.R;
 import com.speedata.uhf.adapter.MessagesAdapter;
 import com.speedata.uhf.bean.MessagesBean;
 import com.speedata.uhf.tools.RecyclerViewSpacesItemDecoration;
+import com.speedata.uhf.tools.SharedPFUtils;
 import com.speedata.uhf.tools.ToastUtils;
 
 import java.util.ArrayList;
@@ -86,6 +87,7 @@ public class MessageActivity extends BaseActivity {
                         pagesize = 4;
                         arrayList.clear();
                         getinfo(page,pagesize);
+                        messagesAdapter.notifyDataSetChanged();
                         xRecyclerView.refreshComplete();
                     }
                 },1000);
@@ -100,6 +102,7 @@ public class MessageActivity extends BaseActivity {
                     public void run() {
                         pagesize = pagesize+4;
                         getinfo(page,pagesize);
+                        messagesAdapter.notifyDataSetChanged();
                         xRecyclerView.loadMoreComplete();
                     }
                 },2000);
@@ -125,6 +128,7 @@ public class MessageActivity extends BaseActivity {
                 .tag(this)
                 .params("page",page1)
                 .params("pageSize",pagesize1)
+                .params("groupCode", SharedPFUtils.getParam(this,"groupno","").toString())
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Response response, Exception e) {
@@ -140,6 +144,7 @@ public class MessageActivity extends BaseActivity {
                         if(messagesBean.getState()==1){
                             Log.e("***", "onSuccess: 长度"+messagesBean.getData().getPageInfo().getTotal() );
                             if (messagesBean.getData().getPageInfo().getList().size()>0){
+
                                 for (int i = 0; i <messagesBean.getData().getPageInfo().getList().size() ; i++) {
                                     arrayList.add(messagesBean);
                                 }
