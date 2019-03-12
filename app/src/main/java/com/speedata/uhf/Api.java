@@ -32,5 +32,7 @@ public class Api {
     public static String fourimg = apiurl+"getTreeImg";
     //根据rfid查区块编号
     public static String selectrfid = apiurl+"getBlockCode";
+    //查询所有最新记录
+    public static String allnews = apiurl+"getAllEnquipment";
 
 }

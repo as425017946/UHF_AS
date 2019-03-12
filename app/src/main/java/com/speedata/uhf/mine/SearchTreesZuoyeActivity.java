@@ -112,9 +112,38 @@ public class SearchTreesZuoyeActivity extends BaseActivity implements View.OnCli
                                         btn8.setTextColor(SearchTreesZuoyeActivity.this.getResources().getColor(R.color.yellows));
                                     }
 
-                                    //查询状态
+                                    //修改状态
+                                    if((i+1)==workBean.getData().getPageInfo().getList().size()){
+                                        String bianhaos = bianhao.substring(0,bianhao.length()-1);
+                                        OkGo.post(Api.starwork)
+                                                .tag(this)
+                                                .params("conservationCode",bianhaos)
+                                                .params("padUserName",SharedPFUtils.getParam(SearchTreesZuoyeActivity.this,"owner","").toString())
+                                                .params("padUserNo",SharedPFUtils.getParam(SearchTreesZuoyeActivity.this,"userno","").toString())
+                                                .params("padUserPhoto",SharedPFUtils.getParam(SearchTreesZuoyeActivity.this,"ownerimg","").toString())
+                                                .execute(new StringCallback() {
+                                                    @Override
+                                                    public void onError(Call call, Response response, Exception e) {
+                                                        super.onError(call, response, e);
+                                                        ToastUtils.shortToast(e+"");
+                                                    }
 
+                                                    @Override
+                                                    public void onSuccess(String s, Call call, Response response) {
+                                                        ToastUtils.shortToast(s);
+                                                        Gson gson = new Gson();
+                                                        UpimgBean upimgBean = gson.fromJson(s,UpimgBean.class);
+                                                        if (upimgBean.getState()==1){
+
+                                                        }else {
+                                                            ToastUtils.shortToast(upimgBean.getMessage());
+                                                        }
+                                                    }
+                                                });
+                                    }
                                 }
+
+
                             }else {
                                 ToastUtils.shortToast("暂无任务可做");
                             }
@@ -131,6 +160,8 @@ public class SearchTreesZuoyeActivity extends BaseActivity implements View.OnCli
 //        btn6.setOnClickListener(this);
 //        btn7.setOnClickListener(this);
 //        btn8.setOnClickListener(this);
+
+
     }
 
     @BindView(R.id.commoe_left)
@@ -189,34 +220,12 @@ public class SearchTreesZuoyeActivity extends BaseActivity implements View.OnCli
      * 上传
      */
     private void upinfo(final String bianhao) {
-        String bianhaos = bianhao.substring(0,bianhao.length()-1);
-        OkGo.post(Api.starwork)
-                .tag(this)
-                .params("conservationCode",bianhaos)
-                .params("padUserName",SharedPFUtils.getParam(this,"owner","").toString())
-                .params("padUserNo",SharedPFUtils.getParam(this,"userno","").toString())
-                .params("padUserPhoto",SharedPFUtils.getParam(this,"ownerimg","").toString())
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Response response, Exception e) {
-                        super.onError(call, response, e);
-                        ToastUtils.shortToast(e+"");
-                    }
-
-                    @Override
-                    public void onSuccess(String s, Call call, Response response) {
-                        Gson gson = new Gson();
-                        UpimgBean upimgBean = gson.fromJson(s,UpimgBean.class);
-                        if (upimgBean.getState()==1){
-                            beginupload(picturePath);
-                        }else {
-                            ToastUtils.shortToast(upimgBean.getMessage());
-                        }
-                    }
-                });
+        beginupload(picturePath);
     }
 
     String picturePath;
+    @BindView(R.id.zuoye_top)
+    ImageView img_top;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -227,6 +236,7 @@ public class SearchTreesZuoyeActivity extends BaseActivity implements View.OnCli
                 img_zuoye.setImageBitmap(ImageUtils.getBitmap(picturePath));
 
                 btn_sousuo.setBackgroundDrawable(SearchTreesZuoyeActivity.this.getResources().getDrawable(R.mipmap.upload_btn_complete_highlight));
+                img_top.setVisibility(View.GONE);
             }
         }
     }

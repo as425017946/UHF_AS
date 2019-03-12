@@ -463,18 +463,19 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/trees_wendu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text="温度"
                                     android:textColor="@color/text_green"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -485,18 +486,19 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/trees_shidu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text="湿度"
                                     android:textColor="@color/text_green"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -507,18 +509,19 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/trees_pm25"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text="PM2.5"
                                     android:textColor="@color/text_green"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -536,16 +539,40 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/trees_qiya"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text="PM10"
+                                    android:textColor="@color/text_green"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/trees_fengli"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@color/text_white"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
                                     android:textColor="@color/text_green"
                                     android:textSize="12sp" />
                             </LinearLayout>
@@ -558,107 +585,29 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/trees_fengsu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
-                                    android:textColor="@color/text_green"
-                                    android:textSize="12sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="1000"
-                                    android:textColor="@color/text_white"
-                                    android:textSize="12sp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text=""
                                     android:textColor="@color/text_green"
                                     android:textSize="12sp" />
                             </LinearLayout>
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:orientation="horizontal">
 
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="1000"
-                                    android:textColor="@color/text_white"
-                                    android:textSize="12sp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="1000"
-                                    android:textColor="@color/text_green"
-                                    android:textSize="12sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="1000"
-                                    android:textColor="@color/text_white"
-                                    android:textSize="12sp" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="1000"
-                                    android:textColor="@color/text_green"
-                                    android:textSize="12sp" />
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                            </LinearLayout>
-                        </LinearLayout>
 
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
                             android:orientation="horizontal">
 
                             <RelativeLayout
@@ -698,18 +647,19 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/trees_turangwendu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text="土壤温度"
                                     android:textColor="@color/text_green"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -720,18 +670,19 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/trees_turanshidu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text="土壤湿度"
                                     android:textColor="@color/text_green"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -742,18 +693,19 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/trees_turangph"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text="土壤PH值"
                                     android:textColor="@color/text_green"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -771,18 +723,19 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/trees_diandaolv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text="土壤电导率"
                                     android:textColor="@color/text_green"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -793,18 +746,19 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/trees_turangyanfen"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text="土壤盐分"
                                     android:textColor="@color/text_green"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -815,18 +769,19 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/trees_shuizhiph"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text="水质PH值"
                                     android:textColor="@color/text_green"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -844,18 +799,19 @@
                                 android:orientation="vertical">
 
                                 <TextView
+                                    android:id="@+id/trees_huizhuodu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text=""
                                     android:textColor="@color/text_white"
                                     android:textSize="12sp" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="1000"
+                                    android:text="水质浊度值"
                                     android:textColor="@color/text_green"
-                                    android:textSize="12sp" />
+                                    android:textSize="10sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -863,14 +819,46 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:orientation="vertical"></LinearLayout>
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/trees_rongjieyang"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@color/text_white"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="水质溶解氧"
+                                    android:textColor="@color/text_green"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:orientation="vertical"></LinearLayout>
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/trees_fuyanglizi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@color/text_white"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="负氧离子"
+                                    android:textColor="@color/text_green"
+                                    android:textSize="10sp" />
+                            </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -1445,6 +1433,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:orientation="horizontal">

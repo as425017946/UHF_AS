@@ -24,6 +24,7 @@
             android:src="@mipmap/start_mask_normal"
             android:scaleType="fitXY"/>
         <ImageView
+            android:id="@+id/zuoye_top"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:layout_centerInParent="true"
